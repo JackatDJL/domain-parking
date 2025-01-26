@@ -1,8 +1,15 @@
 "use client";
 import Link from "next/link";
-import { motion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
+import { useEffect } from "react";
+import { useState } from "react";
 
 export default function Founder() {
+  const [foundationVisible, setFoundationVisible] = useState(true);
+
+  useEffect(() => {
+    setFoundationVisible(false);
+  }, []);
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-8 sm:p-20 font-[family-name:var(--font-geist-sans)] bg-black text-white">
       <header className="w-full flex justify-start items-center gap-4">
@@ -49,17 +56,58 @@ export default function Founder() {
           Mechatronik, Informatik und Robotik zu fördern.
         </p>
 
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1 }}
-          className="mt-8"
-        >
-          <h2 className="text-3xl font-bold">Digitales Jugend Lernzentrum</h2>
-          <p className="text-slate-400 mt-2">
-            Ein Zentrum, das Jugendliche für die Technologien der Zukunft
-            begeistert.
-          </p>
+        <motion.div className="mt-8 flex flex-col items-center">
+          <motion.h1 className="text-4xl font-bold flex" layout>
+            <AnimatePresence>
+              <motion.p>D</motion.p>
+              {!foundationVisible && (
+                <>
+                  {" "}
+                  <motion.p
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.8, delay: 0.5 }}
+                  >
+                    igitales
+                  </motion.p>{" "}
+                </>
+              )}
+              <motion.p>J</motion.p>
+              {!foundationVisible && (
+                <>
+                  <motion.p
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.8, delay: 1 }}
+                  >
+                    ugend{" "}
+                  </motion.p>
+                </>
+              )}
+              <motion.p>L</motion.p>
+              {!foundationVisible && (
+                <>
+                  <motion.p
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.8, delay: 1.5 }}
+                  >
+                    ernzentrum
+                  </motion.p>{" "}
+                </>
+              )}
+              <AnimatePresence>
+                {foundationVisible && (
+                  <motion.p
+                    animate={{ opacity: 1, y: 20 }}
+                    exit={{ opacity: 0, y: 0 }}
+                  >
+                    Foundation
+                  </motion.p>
+                )}
+              </AnimatePresence>
+            </AnimatePresence>
+          </motion.h1>
         </motion.div>
       </main>
     </div>
