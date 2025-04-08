@@ -7,8 +7,8 @@ export default function Home() {
         Welcome to my Domain Parking Lot!
       </h1>
       <p className="text-lg text-center">
-        Hey there! You've reached one of my parked domains. This domain is owned
-        by the{" "}
+        Hey there! You&apos;ve reached one of my parked domains. This domain is
+        owned by the{" "}
         <Link
           href="https://djl.foundation"
           prefetch
@@ -16,7 +16,7 @@ export default function Home() {
         >
           DJL Foundation
         </Link>
-        . We're based in Germany.
+        . We&apos;re based in Germany.
       </p>
       <p className="text-lg text-center">
         All our projects are for non-profit purposes.
