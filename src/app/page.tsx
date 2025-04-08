@@ -2,12 +2,13 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+    <div className="flex flex-col items-center justify-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]  bg-black text-white">
       <h1 className="text-4xl font-bold text-center mb-4">
-        This Domain is Parked on my Bun!
+        Welcome to my Domain Parking Lot!
       </h1>
       <p className="text-lg text-center">
-        Diese Domains sind Eigentum der{" "}
+        Hey there! You've reached one of my parked domains. This domain is owned
+        by the{" "}
         <Link
           href="https://djl.foundation"
           prefetch
@@ -15,10 +16,10 @@ export default function Home() {
         >
           DJL Foundation
         </Link>
-        . Wir sind in Deutschland ansässig.
+        . We're based in Germany.
       </p>
       <p className="text-lg text-center">
-        Unsere Projekte dienen ausschließlich gemeinnützigen Zwecken.
+        All our projects are for non-profit purposes.
       </p>
       <div className="flex justify-center mt-8">
         <Link
@@ -26,7 +27,7 @@ export default function Home() {
           prefetch
           className="text-blue-500 hover:underline"
         >
-          Aktuelle Projekte
+          Check out our projects
         </Link>
         <span className="mx-2">|</span>
         <Link
@@ -34,7 +35,7 @@ export default function Home() {
           prefetch
           className="text-blue-500 hover:underline"
         >
-          Unser Gründer
+          Meet our founder
         </Link>
       </div>
     </div>
