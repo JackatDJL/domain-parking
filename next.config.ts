@@ -1,6 +1,16 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  images: {
+    domains: [
+      "djl.foundation",
+      "atheblues.de",
+      "hackclub-stade.de",
+      "ewf-stade.de",
+      "eu.i.posthog.com",
+      "eu-assets.i.posthog.com",
+    ],
+  },
   async rewrites() {
     return [
       {

@@ -86,9 +86,9 @@ export default function Founder() {
           transition={{ duration: 1, delay: 0.3 }}
         >
           <p className="text-lg mb-4">
-            Ich bin Jack Ruder, stellvertretender Schülersprecher des Gymnasium
-            Athenaeum Stade und habe dieses Netzwerk gegründet, um die Bildung
-            in infotechnologischen und robotechnologischen Bereichen zu fördern.
+            Ich bin Jack Ruder und habe dieses Netzwerk gegründet, um die
+            Bildung in infotechnologischen und robotechnologischen Bereichen zu
+            fördern.
           </p>
           <p className="text-lg mb-4">
             Auf meinem Lebensweg habe ich über weite Umwege, neben den üblichen
