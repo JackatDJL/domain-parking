@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 import ProjectBox from "@/components/ProjectBox";
 import projects from "@/data/projects";
