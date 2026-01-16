@@ -1,58 +1,44 @@
-// app/providers.tsx
-"use client";
-
-import { usePathname, useSearchParams } from "next/navigation";
-import { useEffect, Suspense } from "react";
-import { usePostHog } from "posthog-js/react";
-
+import { useEffect, useMemo } from "react";
+import { PostHogProvider as PHProvider, usePostHog } from "posthog-js/react";
 import posthog from "posthog-js";
-import { PostHogProvider as PHProvider } from "posthog-js/react";
+import { Router } from "@tanstack/react-router";
 
-export function PostHogProvider({ children }: { children: React.ReactNode }) {
+export function PostHogProvider({
+  children,
+  router,
+}: {
+  children: React.ReactNode;
+  router: Router<any, any>;
+}) {
   useEffect(() => {
-    posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY!, {
+    posthog.init(import.meta.env.VITE_PUBLIC_POSTHOG_KEY ?? "", {
       api_host: "/ingest",
       ui_host: "https://eu.posthog.com",
       capture_exceptions: true,
-      debug: process.env.NODE_ENV === "development",
+      debug: import.meta.env.DEV,
     });
   }, []);
 
+  const phClient = useMemo(() => posthog, []);
+
   return (
-    <PHProvider client={posthog}>
-      <SuspendedPostHogPageView />
+    <PHProvider client={phClient}>
+      <PostHogPageView router={router} />
       {children}
     </PHProvider>
   );
 }
 
-function PostHogPageView() {
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const posthog = usePostHog();
+function PostHogPageView({ router }: { router: Router<any, any> }) {
+  const posthogClient = usePostHog();
 
-  // Track pageviews
   useEffect(() => {
-    if (pathname && posthog) {
-      let url = window.origin + pathname;
-      if (searchParams.toString()) {
-        url = url + "?" + searchParams.toString();
-      }
-
-      posthog.capture("$pageview", { $current_url: url });
-    }
-  }, [pathname, searchParams, posthog]);
+    const unsub = router.subscribe("onResolved", () => {
+      const url = window.location.href;
+      posthogClient?.capture("$pageview", { $current_url: url });
+    });
+    return () => unsub?.();
+  }, [router, posthogClient]);
 
   return null;
-}
-
-// Wrap PostHogPageView in Suspense to avoid the useSearchParams usage above
-// from de-opting the whole app into client-side rendering
-// See: https://nextjs.org/docs/messages/deopted-into-client-rendering
-function SuspendedPostHogPageView() {
-  return (
-    <Suspense fallback={null}>
-      <PostHogPageView />
-    </Suspense>
-  );
 }
